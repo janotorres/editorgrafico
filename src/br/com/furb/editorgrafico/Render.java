@@ -1,4 +1,4 @@
-package br.com.furb.exercicio2_7;
+package br.com.furb.editorgrafico;
 
 import javax.media.opengl.DebugGL;
 import javax.media.opengl.GL;

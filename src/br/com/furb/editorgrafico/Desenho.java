@@ -1,4 +1,4 @@
-package br.com.furb.exercicio2_7;
+package br.com.furb.editorgrafico;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
