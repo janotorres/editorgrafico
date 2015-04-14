@@ -3,19 +3,22 @@ package br.com.furb.editorgrafico.objetos;
 
 public class Camera  {
 
-	private float ortho2D_minX;
+	private double ortho2D_minX;
 
-	private float ortho2D_maxX;
+	private double ortho2D_maxX;
 
-	private float ortho2D_minY;
+	private double ortho2D_minY;
 
-	private float ortho2D_maxY;
+	private double ortho2D_maxY;
 	
 	public Camera(Mundo mundo) {
-		
+		this.ortho2D_minX = -400f;
+		this.ortho2D_maxX = 400f;
+		this.ortho2D_minY = -400f;
+		this.ortho2D_maxY = 400f;
 	}
 
-	public float getOrtho2D_minX() {
+	public double getOrtho2D_minX() {
 		return ortho2D_minX;
 	}
 
@@ -23,7 +26,7 @@ public class Camera  {
 		ortho2D_minX = ortho2d_minX;
 	}
 
-	public float getOrtho2D_maxX() {
+	public double getOrtho2D_maxX() {
 		return ortho2D_maxX;
 	}
 
@@ -31,7 +34,7 @@ public class Camera  {
 		ortho2D_maxX = ortho2d_maxX;
 	}
 
-	public float getOrtho2D_minY() {
+	public double getOrtho2D_minY() {
 		return ortho2D_minY;
 	}
 
@@ -39,7 +42,7 @@ public class Camera  {
 		ortho2D_minY = ortho2d_minY;
 	}
 
-	public float getOrtho2D_maxY() {
+	public double getOrtho2D_maxY() {
 		return ortho2D_maxY;
 	}
 

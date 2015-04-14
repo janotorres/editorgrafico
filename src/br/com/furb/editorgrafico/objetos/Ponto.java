@@ -1,6 +1,13 @@
 package br.com.furb.editorgrafico.objetos;
 
-public class Ponto {
+public class Ponto implements Cloneable {
+
+	public Ponto(float x, float y, float z) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
 
 	private float x;
 	
@@ -30,5 +37,19 @@ public class Ponto {
 
 	public void setZ(float z) {
 		this.z = z;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+	
+	public Ponto copy() {
+		try {
+			return (Ponto) this.clone();
+		} catch (CloneNotSupportedException e) {
+			return null;
+		}
+		
 	}
 }

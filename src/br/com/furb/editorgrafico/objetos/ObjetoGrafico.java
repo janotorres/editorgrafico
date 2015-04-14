@@ -1,6 +1,9 @@
 package br.com.furb.editorgrafico.objetos;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import br.com.furb.editorgrafico.enumerations.Cor;
 
 public class ObjetoGrafico {
 
@@ -17,6 +20,13 @@ public class ObjetoGrafico {
 	private List<ObjetoGrafico> objetoGraficos;
 	
 	private boolean selected;
+
+	public ObjetoGrafico(Ponto ponto) {
+		this.pontos = new ArrayList<Ponto>();
+		this.pontos.add(ponto);
+		this.pontos.add(ponto.copy());
+		
+	}
 
 	public Cor getCor() {
 		return cor;

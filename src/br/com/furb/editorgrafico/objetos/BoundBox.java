@@ -42,6 +42,9 @@ public class BoundBox {
 		this.yMax = yMax;
 	}
 
+	public boolean contain(Ponto ponto){
+		return true;
+	}
 	public void desenha() {
 		
 	}

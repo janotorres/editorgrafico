@@ -1,5 +1,6 @@
 package br.com.furb.editorgrafico.objetos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.media.opengl.DebugGL;
@@ -10,6 +11,8 @@ import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
+import br.com.furb.editorgrafico.enumerations.Estado;
+import br.com.furb.editorgrafico.listeners.MouseListener;
 import br.com.furb.editorgrafico.listeners.ViewListener;
 
 public class Mundo extends GLCanvas implements GLEventListener{
@@ -25,6 +28,8 @@ public class Mundo extends GLCanvas implements GLEventListener{
 	private List<ObjetoGrafico> objetos;
 	
 	private Camera camera;
+	
+	private Estado estado;
 
 	private static GLCapabilities getGLCapabilities() {
 		GLCapabilities glCaps = new GLCapabilities();
@@ -38,8 +43,14 @@ public class Mundo extends GLCanvas implements GLEventListener{
 	public Mundo() {
 		super(getGLCapabilities());
 		this.camera = new Camera(this);
+		this.objetos = new ArrayList<ObjetoGrafico>();
+		this.estado = Estado.DESENHO;
+		MouseListener mouseListener = new MouseListener(this);
+		
 		this.addGLEventListener(this);        
 		this.addKeyListener(new ViewListener(this));
+		this.addMouseListener(mouseListener);
+		this.addMouseMotionListener(mouseListener);
 		this.requestFocus();			
 	}
 	
@@ -94,7 +105,8 @@ public class Mundo extends GLCanvas implements GLEventListener{
 
 	@Override
 	public void init(GLAutoDrawable drawable) {
-		gl = drawable.getGL();
+		glDrawable = drawable;
+		gl = glDrawable.getGL();
 		glu = new GLU();
 		glDrawable.setGL(new DebugGL(gl));
 		gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -107,6 +119,16 @@ public class Mundo extends GLCanvas implements GLEventListener{
 	
 	public void desenha(){
 		glDrawable.display();
+	}
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	public void criaObjeto(Ponto ponto) {
+		ObjetoGrafico objetoGrafico = new ObjetoGrafico(ponto);
+		this.objetos.add(objetoGrafico);
 	}
 
 }

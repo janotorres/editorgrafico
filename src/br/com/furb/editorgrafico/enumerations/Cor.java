@@ -1,4 +1,4 @@
-package br.com.furb.editorgrafico.objetos;
+package br.com.furb.editorgrafico.enumerations;
 
 public enum Cor {
 
