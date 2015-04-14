@@ -41,4 +41,8 @@ public class BoundBox {
 	public void setyMax(float yMax) {
 		this.yMax = yMax;
 	}
+
+	public void desenha() {
+		
+	}
 }

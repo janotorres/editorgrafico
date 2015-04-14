@@ -2,11 +2,46 @@ package br.com.furb.editorgrafico.objetos;
 
 import java.util.List;
 
-public class Mundo {
+import javax.media.opengl.DebugGL;
+import javax.media.opengl.GL;
+import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLCapabilities;
+import javax.media.opengl.GLEventListener;
+import javax.media.opengl.glu.GLU;
 
+import br.com.furb.editorgrafico.listeners.ViewListener;
+
+public class Mundo extends GLCanvas implements GLEventListener{
+
+	private static final long serialVersionUID = 1L;
+
+	private GL gl;
+	
+	private GLU glu;
+	
+	private GLAutoDrawable glDrawable;
+	
 	private List<ObjetoGrafico> objetos;
 	
 	private Camera camera;
+
+	private static GLCapabilities getGLCapabilities() {
+		GLCapabilities glCaps = new GLCapabilities();
+		glCaps.setRedBits(8);
+		glCaps.setBlueBits(8);
+		glCaps.setGreenBits(8);
+		glCaps.setAlphaBits(8); 
+		return glCaps;
+
+	}
+	public Mundo() {
+		super(getGLCapabilities());
+		this.camera = new Camera(this);
+		this.addGLEventListener(this);        
+		this.addKeyListener(new ViewListener(this));
+		this.requestFocus();			
+	}
 	
 	public List<ObjetoGrafico> getObjetos() {
 		return objetos;
@@ -22,6 +57,56 @@ public class Mundo {
 
 	public void setCamera(Camera camera) {
 		this.camera = camera;
+	}
+
+	@Override
+	public void display(GLAutoDrawable arg0) {
+		try 
+		{
+			gl.glClear(GL.GL_COLOR_BUFFER_BIT);
+			gl.glMatrixMode(GL.GL_PROJECTION);
+			gl.glLoadIdentity();
+			glu.gluOrtho2D(camera.getOrtho2D_minX(), camera.getOrtho2D_maxX(), camera.getOrtho2D_minY(), camera.getOrtho2D_maxY());
+			gl.glMatrixMode(GL.GL_MODELVIEW);
+			desenhaObjetosGraficos();
+			gl.glLoadIdentity();
+			gl.glFlush();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void desenhaObjetosGraficos() {
+		for (int i = 0; i < objetos.size(); i++) {
+			ObjetoGrafico objetoGrafico = objetos.get(i);
+			objetoGrafico.desenha();
+			if (objetoGrafico.isSelected())
+				objetoGrafico.getBoundBox().desenha();
+			
+		}
+		
+	}
+	@Override
+	public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
+		
+	}
+
+	@Override
+	public void init(GLAutoDrawable drawable) {
+		gl = drawable.getGL();
+		glu = new GLU();
+		glDrawable.setGL(new DebugGL(gl));
+		gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	}
+
+	@Override
+	public void reshape(GLAutoDrawable arg0, int arg1, int arg2, int arg3, int arg4) {
+		
+	}
+	
+	public void desenha(){
+		glDrawable.display();
 	}
 
 }

@@ -15,6 +15,8 @@ public class ObjetoGrafico {
 	private BoundBox boundBox;
 	
 	private List<ObjetoGrafico> objetoGraficos;
+	
+	private boolean selected;
 
 	public Cor getCor() {
 		return cor;
@@ -62,6 +64,18 @@ public class ObjetoGrafico {
 
 	public void setObjetoGraficos(List<ObjetoGrafico> objetoGraficos) {
 		this.objetoGraficos = objetoGraficos;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public void desenha() {
+		
 	}
 	
 }
