@@ -16,13 +16,31 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 	}
 	
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseDragged(MouseEvent e) {
+
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseMoved(MouseEvent e) {
+		switch (mundo.getEstado()){
+		
+		case DESENHANDO:
+			
+			int x = (int)mundo.getCamera().getOrtho2D_minX() + (2 * e.getX());
+			int y = (int)mundo.getCamera().getOrtho2D_maxY() - (2 * e.getY());
+			Ponto ponto = new Ponto(e.getX(), e.getY(), 0);
+			System.out.println(e.getX());
+			System.out.println(e.getY());
+			int pos = mundo.getObjetos().get(1).getPontos().size() - 1;
+			mundo.getObjetos().get(1).getPontos().set(pos,ponto);
+			mundo.desenha();
+			break;
+		
+		case SELECAO:
+			
+			break;
+		}
+		
 	}
 
 	@Override
@@ -30,7 +48,12 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 		switch (mundo.getEstado()){
 		
 		case DESENHO:
-			Ponto ponto = new Ponto(e.getX(), e.getY(), 0);
+			
+			int x = (int)mundo.getCamera().getOrtho2D_minX() + (2 * e.getX());
+			int y = (int)mundo.getCamera().getOrtho2D_maxY() - (2 * e.getY());
+			Ponto ponto = new Ponto(e.getX() , e.getY(), 0);
+			System.out.println(e.getX());
+			System.out.println(e.getY());
 			mundo.criaObjeto(ponto);
 			mundo.setEstado(Estado.DESENHANDO);
 			break;
@@ -43,6 +66,7 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 			
 			break;
 		}
+		mundo.desenha();
 	}
 
 	@Override

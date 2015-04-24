@@ -29,6 +29,7 @@ public class ObjetoGrafico {
 		this.pontos = new ArrayList<Ponto>();
 		this.transformacao = new Transformacao();
 		this.pontos.add(ponto);
+		this.pontos.add(ponto.copy());
 	}
 
 	public Cor getCor() {

@@ -45,7 +45,19 @@ public class BoundBox {
 	public boolean contain(Ponto ponto){
 		return true;
 	}
+	
+	public float getCentroX(){
+		return ((xMax - xMin) /2) + xMin;
+	}
+	
+	public float getCentroY(){
+		return ((yMax - yMin) /2) + yMin;
+	}
+	
+	
 	public void desenha() {
 		
 	}
+	
+	
 }

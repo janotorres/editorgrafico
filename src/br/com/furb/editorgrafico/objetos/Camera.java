@@ -12,10 +12,10 @@ public class Camera  {
 	private double ortho2D_maxY;
 	
 	public Camera(Mundo mundo) {
-		this.ortho2D_minX = -400f;
+		this.ortho2D_minX = 0f;
 		this.ortho2D_maxX = 400f;
-		this.ortho2D_minY = -400f;
-		this.ortho2D_maxY = 400f;
+		this.ortho2D_minY = 400f;
+		this.ortho2D_maxY = 0f;
 	}
 
 	public double getOrtho2D_minX() {
