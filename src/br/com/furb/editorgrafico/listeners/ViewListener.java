@@ -3,6 +3,7 @@ package br.com.furb.editorgrafico.listeners;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import br.com.furb.editorgrafico.enumerations.Cor;
 import br.com.furb.editorgrafico.objetos.Mundo;
 
 public class ViewListener implements KeyListener {
@@ -45,8 +46,48 @@ public class ViewListener implements KeyListener {
 			mundo.getCamera().moveCima();
 			mundo.desenha();
 			break;
+			
+		case KeyEvent.VK_RIGHT:
+			mundo.moverObjetosDireta();
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_LEFT:
+			mundo.moverObjetosEsquerda();
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_UP:
+			mundo.moverObjetosAcima();
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_DOWN:
+			mundo.moverObjetosAbaixo();
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_1:
+			mundo.aumentarObjeto();
+			mundo.desenha();
+			break;	
+		case KeyEvent.VK_2:
+			mundo.diminuirObjeto();
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_3:
+			mundo.rotacaoObjeto();
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_R:
+			mundo.pintarObjeto(Cor.VERMELHO);
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_G:
+			mundo.pintarObjeto(Cor.VERDE);
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_A:
+			mundo.pintarObjeto(Cor.AZUL);
+			mundo.desenha();
+			break;
 		}
-
 	}
 
 	public void keyReleased(KeyEvent arg0) {

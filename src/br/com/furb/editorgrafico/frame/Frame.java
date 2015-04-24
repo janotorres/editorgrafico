@@ -14,7 +14,6 @@ public class Frame extends JFrame{
 	private int janelaLargura  = 400, janelaAltura = 400;
 	
 	public Frame() {		
-		
 		super("CG-N3");   
 		Mundo mundo = new Mundo();
 		setBounds(300,250,janelaLargura,janelaAltura+22); 

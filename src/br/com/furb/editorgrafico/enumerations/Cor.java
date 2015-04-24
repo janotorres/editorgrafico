@@ -2,7 +2,6 @@ package br.com.furb.editorgrafico.enumerations;
 
 public enum Cor {
 
-	
 	BRANCO(255,255,255),
 	AZUL(0,0,255),
 	VERMELHO(255,0,0),
@@ -12,25 +11,25 @@ public enum Cor {
 	CIANO(0,255,255),
 	PRETO(0,0,0);
 	
-	private int red;
-	private int green;
-	private int blue;
+	private float red;
+	private float green;
+	private float blue;
 
-	private Cor(int red, int green, int blue) {
+	private Cor(float red, float green, float blue) {
 		this.red = red;
 		this.green = green;
 		this.blue = blue;
 	}
 
-	public int getGreen() {
+	public float getGreen() {
 		return green;
 	}
 
-	public int getBlue() {
+	public float getBlue() {
 		return blue;
 	}
 
-	public int getRed() {
+	public float getRed() {
 		return red;
 	}
 }
