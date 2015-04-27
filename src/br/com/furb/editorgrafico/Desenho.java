@@ -10,6 +10,7 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 
+/**Pode retirar essa classe?*/
 public class Desenho implements GLEventListener, KeyListener, MouseListener,
 		MouseMotionListener {
 

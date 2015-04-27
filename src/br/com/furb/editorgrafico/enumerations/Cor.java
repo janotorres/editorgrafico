@@ -1,5 +1,6 @@
 package br.com.furb.editorgrafico.enumerations;
 
+/** Enumerador utilizado para setar a cor do objeto gráfico.*/
 public enum Cor {
 
 	BRANCO(255,255,255),

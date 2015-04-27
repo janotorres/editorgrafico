@@ -1,6 +1,7 @@
 package br.com.furb.editorgrafico.objetos;
 
-
+/**Câmeta do Editor Gráfico, classe utilizada para setar os valores do
+ * Ortho2D do OpenGL.*/
 public class Camera  {
 
 	private double ortho2D_minX;

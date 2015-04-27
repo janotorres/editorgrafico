@@ -1,5 +1,7 @@
 package br.com.furb.editorgrafico.objetos;
 
+/** Classe utilizada para obter o BoundBox do objeto e desenhá-lo ao redor
+ * do objeto quando este estiver selecionado.*/
 public class BoundBox {
 
 	private float xMin;

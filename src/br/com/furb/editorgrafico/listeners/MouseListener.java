@@ -7,6 +7,7 @@ import br.com.furb.editorgrafico.enumerations.Estado;
 import br.com.furb.editorgrafico.objetos.Mundo;
 import br.com.furb.editorgrafico.objetos.Ponto;
 
+/**Listener do Mouse, utilizado quando o usuário está iteragindo com o Editor (movendo e clicando o mouse) */
 public class MouseListener implements java.awt.event.MouseListener, MouseMotionListener {
 
 	private Mundo mundo;

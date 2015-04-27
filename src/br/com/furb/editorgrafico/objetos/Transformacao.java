@@ -1,6 +1,6 @@
 package br.com.furb.editorgrafico.objetos;
 
-
+/** Classe responsável por rotacionar, alterar a escala e transladar o objeto. */
 public class Transformacao {
 
 	static final double RAS_DEG_TO_RAD = 0.017453292519943295769236907684886;
@@ -10,6 +10,7 @@ public class Transformacao {
 	public Transformacao() {
 	}
 
+	/** Transforma a matriz em matriz identidade (diagonoal principal = 1 e o resto 0)*/
 	public void MakeIdentity() {
 		for (int i = 0; i < 16; ++i) {
 			matrix[i] = 0.0;
@@ -17,6 +18,9 @@ public class Transformacao {
 		matrix[0] = matrix[5] = matrix[10] = matrix[15] = 1.0;
 	}
 
+	/** Altera as posições 12, 13 e 14 da matriz, fazendo o objeto ser transladado
+	 * de acordo com o parâmetro.
+	 * @param Coordenadas do vetor de translação */
 	public void MakeTranslation(Ponto translationVector) {
 		MakeIdentity();
 		matrix[12] = translationVector.getX();
@@ -24,6 +28,9 @@ public class Transformacao {
 		matrix[14] = translationVector.getZ();
 	}
 
+	/** Altera as posições 5, 9, 6 e 10 da matriz, fazendo o objeto ser rotacionado
+	 * em X de acordo com o parâmetro.
+	 * @param Radianos do X */
 	public void MakeXRotation(double radians) {
 		MakeIdentity();
 		matrix[5] = Math.cos(radians);
@@ -32,6 +39,9 @@ public class Transformacao {
 		matrix[10] = Math.cos(radians);
 	}
 
+	/** Altera as posições 0, 8, 2 e 10 da matriz, fazendo o objeto ser rotacionado
+	 * em Y de acordo com o parâmetro.
+	 * @param Radianos do Y */
 	public void MakeYRotation(double radians) {
 		MakeIdentity();
 		matrix[0] = Math.cos(radians);
@@ -40,6 +50,9 @@ public class Transformacao {
 		matrix[10] = Math.cos(radians);
 	}
 
+	/** Altera as posições 0, 4, 1 e 5 da matriz, fazendo o objeto ser rotacionado
+	 * em Z de acordo com o parâmetro.
+	 * @param Radianos do Z */
 	public void MakeZRotation(double radians) {
 		MakeIdentity();
 		matrix[0] = Math.cos(radians);
@@ -48,6 +61,11 @@ public class Transformacao {
 		matrix[5] = Math.cos(radians);
 	}
 
+	/** Altera as posições 0, 5, e 10 da matriz, alterando a escala
+	 * do objeto de acordo com os parânetros
+	 * @param Coordenadas de X 
+	 * @param Coordenadas de Y
+	 * @param Coordenadas de Z*/
 	public void MakeScale(double sX, double sY, double sZ) {
 		MakeIdentity();
 		matrix[0] = sX;
@@ -55,6 +73,10 @@ public class Transformacao {
 		matrix[10] = sZ;
 	}
 
+	/** Método utilizado para manter as transformações do objeto.
+	 * @param Transformação da matriz em questão.
+	 * @return Retorna a multipliacação das matrizes.	 * 
+	 */
 	public Transformacao transformMatrix(Transformacao t) {
 		Transformacao result = new Transformacao();
 		for (int i = 0; i < 16; ++i)

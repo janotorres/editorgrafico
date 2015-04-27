@@ -6,6 +6,8 @@ import java.awt.event.KeyListener;
 import br.com.furb.editorgrafico.enumerations.Cor;
 import br.com.furb.editorgrafico.objetos.Mundo;
 
+/**Listener do teclado, utilizado para identificar quando o usuário que transformar
+ * algum objeto, ou alterar o modo de edição do editor.*/
 public class ViewListener implements KeyListener {
 
 	private Mundo mundo;
@@ -14,6 +16,18 @@ public class ViewListener implements KeyListener {
 		this.mundo = mundo;
 	}
 
+	/**Método que age de acordo com a tecla pressionado pelo usuário:
+	 * Flecha da direita: Move o objeto selecionado para a esqueda;
+	 * Flecha da esquerda: Move o objeto selecionado para a direita;
+	 * Flecha para baixo: Move o objeto selecionado para baixo;
+	 * Flecha para cima: Move o objeto selecionado para cima;
+	 * 1: Aumenta escala do objeto selecionado;
+	 * 2: Diminui escala do objeto selecionado;
+	 * 3: Rotaciona objeto selecionado;
+	 * R: Altera a cor do objeto selecionado para vermelho;
+	 * G: Altera a cor do objeto selecionado para verde;
+	 * A: Altera a cor do objeto selecionado para azul;
+	 * */
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 

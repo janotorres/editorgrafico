@@ -7,6 +7,7 @@ import javax.media.opengl.GL;
 
 import br.com.furb.editorgrafico.enumerations.Cor;
 
+/**Classe que representa o objeto gráfico desenhado pelo usuário no editor gráfico. */
 public class ObjetoGrafico {
 
 	private Cor cor;
@@ -88,6 +89,9 @@ public class ObjetoGrafico {
 		this.selected = selected;
 	}
 
+	/** Método que desenha o objeto gráfico no editor gráfico. Utiliza os métodos do OpenGL.
+	 * É setado a cor, a matriz de transformação, a primitiva gráfica e são desenhados
+	 * os filhos do objeto, caso existirem.*/
 	public void desenha() {
 		getGl().glColor3f(getCor().getRed(), getCor().getGreen(), getCor().getBlue());
 
@@ -131,6 +135,7 @@ public class ObjetoGrafico {
 		translacao(point);
 	}
 	
+	/** Método que aumenta a escala do desenho. Utiliza a matriz de transformação. */
 	public void aumentaDesenho(){
 		
 		Ponto ponto = new Ponto(-150.0f, -150.0f, 0);
@@ -152,6 +157,7 @@ public class ObjetoGrafico {
 		setTransformacao(getTransformacao().transformMatrix(matrizGlobal));
 	}
 	
+	/** Método que diminui a escala do desenho. Utiliza a matriz de transformação. */
 	public void diminuiDesenho(){
 		Ponto ponto = new Ponto(-150f, -150f, 0);
 		Transformacao matrizTranslate = new Transformacao();
@@ -172,6 +178,7 @@ public class ObjetoGrafico {
 		setTransformacao(getTransformacao().transformMatrix(matrizGlobal));
 	}
 	
+	/** Método que aumenta rotaciona o desenho. Utiliza a matriz de transformação. */
 	public void rotacaoDesenho(){
 		Ponto ponto = new Ponto(-150, -150, 0);
 		Transformacao matrizTranslate = new Transformacao();
@@ -192,6 +199,7 @@ public class ObjetoGrafico {
 		setTransformacao(getTransformacao().transformMatrix(matrizGlobal));
 	}
 	
+	/** Método responsável pela translação do objeto. */
 	public void translacao(Ponto ponto) {
 		Transformacao matrizTranslate = new Transformacao();
 		matrizTranslate.MakeTranslation(ponto);

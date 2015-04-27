@@ -7,7 +7,7 @@ import javax.swing.WindowConstants;
 
 import br.com.furb.editorgrafico.objetos.Mundo;
 
-
+/** Editor gráfico. No construtor é adicionado o Mundo (canvas) ao frame. */
 public class Frame extends JFrame{
 	
 	private static final long serialVersionUID = 1L;

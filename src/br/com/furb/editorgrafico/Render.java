@@ -5,6 +5,7 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.glu.GLU;
 
+/**Pode retirar essa classe?*/
 public class Render {
 	
 	private GL gl;

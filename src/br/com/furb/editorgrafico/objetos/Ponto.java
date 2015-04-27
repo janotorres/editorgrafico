@@ -1,5 +1,6 @@
 package br.com.furb.editorgrafico.objetos;
 
+/** Classe que armazena as coordenadas do vetor do objeto gráfico. */
 public class Ponto implements Cloneable {
 
 	public Ponto(float x, float y, float z) {

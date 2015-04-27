@@ -16,6 +16,8 @@ import br.com.furb.editorgrafico.enumerations.Estado;
 import br.com.furb.editorgrafico.listeners.MouseListener;
 import br.com.furb.editorgrafico.listeners.ViewListener;
 
+/** Classe que implementa os métodos e eventos do OpenGL, é aonde os desenhos 
+ * são renderizados e manipulados . */
 public class Mundo extends GLCanvas implements GLEventListener{
 
 	private static final long serialVersionUID = 1L;
@@ -41,6 +43,8 @@ public class Mundo extends GLCanvas implements GLEventListener{
 		return glCaps;
 
 	}
+	/** Construtor da classe Mundo. Seta os Listeners e as principais entidades:
+	 * câmera e estado*/
 	public Mundo() {
 		super(getGLCapabilities());
 		this.camera = new Camera(this);
@@ -81,6 +85,7 @@ public class Mundo extends GLCanvas implements GLEventListener{
 		this.camera = camera;
 	}
 
+	/** Método do OpenGL aonde é definido o Ortho2D (câmera), a matriz em foco, e aonde são desenhados os objetos gráficos.*/
 	@Override
 	public void display(GLAutoDrawable arg0) {
 		try 
@@ -111,6 +116,7 @@ public class Mundo extends GLCanvas implements GLEventListener{
 		gl.glEnd();
 	}
 
+	/**Método que além de desenhar os objetos gráficos, desenha a BoundBox ao redor do objeto selecionado.*/
 	private void desenhaObjetosGraficos() {
 		for (int i = 0; i < objetos.size(); i++) {
 			ObjetoGrafico objetoGrafico = objetos.get(i);
