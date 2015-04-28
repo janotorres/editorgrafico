@@ -29,38 +29,7 @@ public class ViewListener implements KeyListener {
 	 * A: Altera a cor do objeto selecionado para azul;
 	 * */
 	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-
-		case KeyEvent.VK_O:
-			mundo.getCamera().zoomOut();
-			mundo.desenha();
-			break;
-
-		case KeyEvent.VK_I:
-			mundo.getCamera().zoomIn();
-			mundo.desenha();
-			break;
-
-		case KeyEvent.VK_E:
-			mundo.getCamera().moveEsquerda();
-			mundo.desenha();
-			break;
-
-		case KeyEvent.VK_D:
-			mundo.getCamera().moveDireita();
-			mundo.desenha();
-			break;
-
-		case KeyEvent.VK_B:
-			mundo.getCamera().moveBaixo();
-			mundo.desenha();
-			break;
-
-		case KeyEvent.VK_C:
-			mundo.getCamera().moveCima();
-			mundo.desenha();
-			break;
-			
+		switch (e.getKeyCode()) {			
 		case KeyEvent.VK_RIGHT:
 			mundo.moverObjetosDireta();
 			mundo.desenha();
