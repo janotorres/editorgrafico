@@ -34,6 +34,8 @@ public class Mundo extends GLCanvas implements GLEventListener{
 	
 	private Estado estado;
 
+	private Ponto pontoEmEdicao;
+
 	private static GLCapabilities getGLCapabilities() {
 		GLCapabilities glCaps = new GLCapabilities();
 		glCaps.setRedBits(8);
@@ -52,10 +54,10 @@ public class Mundo extends GLCanvas implements GLEventListener{
 		this.estado = Estado.DESENHO;
 		MouseListener mouseListener = new MouseListener(this);
 		
-		Ponto ponto1 = new Ponto(100, 100, 0);
+		/*Ponto ponto1 = new Ponto(100, 100, 0);
 		Ponto ponto2 = new Ponto(100, 200, 0);
 		Ponto ponto3 = new Ponto(200, 200, 0);
-		Ponto ponto4 = new Ponto(200, 100, 0);
+		Ponto ponto4 = new Ponto(200, 100, 0);*/
 		
 		this.addGLEventListener(this);        
 		this.addKeyListener(new ViewListener(this));
@@ -63,10 +65,10 @@ public class Mundo extends GLCanvas implements GLEventListener{
 		this.addMouseMotionListener(mouseListener);
 		this.requestFocus();
 		
-		criaObjeto(ponto1);
+		/*criaObjeto(ponto1);
 		this.objetos.get(0).getPontos().add(ponto2);
 		this.objetos.get(0).getPontos().add(ponto3);
-		this.objetos.get(0).getPontos().add(ponto4);
+		this.objetos.get(0).getPontos().add(ponto4);*/
 	}
 	
 	public List<ObjetoGrafico> getObjetos() {
@@ -159,7 +161,7 @@ public class Mundo extends GLCanvas implements GLEventListener{
 	
 	public void criaObjeto(Ponto ponto) {
 		ObjetoGrafico objetoGrafico = new ObjetoGrafico(ponto);
-		objetoGrafico.setPrimitivaGrafica(GL.GL_LINE_LOOP);
+		objetoGrafico.setPrimitivaGrafica(GL.GL_LINE_STRIP);
 		objetoGrafico.setCor(Cor.PRETO);
 		this.objetos.add(objetoGrafico);
 	}
@@ -211,5 +213,41 @@ public class Mundo extends GLCanvas implements GLEventListener{
 			objetos.get(i).setCor(cor);
 		}
 	}
+	
+	public ObjetoGrafico getUltimoObjeto(){
+		int posicaoObjeto = getObjetos().size() - 1;
+		return getObjetos().get(posicaoObjeto);
+	}
 
+	public void deletaPonto(Ponto p){
+		for (ObjetoGrafico objeto : objetos) {
+			for (Ponto ponto : objeto.getPontos()){
+				if (ponto.ehProximo(p)){
+					objeto.getPontos().remove(ponto);
+					System.out.println("Ponto Removido");
+					return;
+				}
+			}
+		}
+	}
+	public Ponto getPontoEmEdicao() {
+		return this.pontoEmEdicao;
+	}
+	
+	public void editarPonto(Ponto p) {
+		for (ObjetoGrafico objeto : objetos) {
+			for (Ponto ponto : objeto.getPontos()){
+				if (ponto.ehProximo(p)){
+					System.out.println(ponto);
+					System.out.println(p);
+					this.pontoEmEdicao = ponto;
+					System.out.println("SELECIONOU PONTO");
+				}
+			}
+		}		
+	}
+	public void setPontoEmEdicao(Ponto ponto) {
+		this.pontoEmEdicao = ponto;
+		
+	}
 }

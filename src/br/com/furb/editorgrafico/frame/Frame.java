@@ -16,7 +16,7 @@ public class Frame extends JFrame{
 	public Frame() {		
 		super("CG-N3");   
 		Mundo mundo = new Mundo();
-		setBounds(300,250,janelaLargura,janelaAltura+22); 
+		setBounds(300,250,janelaLargura+15,janelaAltura+39); 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
 		add(mundo,BorderLayout.CENTER);

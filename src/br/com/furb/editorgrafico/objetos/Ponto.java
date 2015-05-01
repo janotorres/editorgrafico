@@ -53,4 +53,24 @@ public class Ponto implements Cloneable {
 		}
 		
 	}
+	@Override
+	public String toString() {
+		return "[X="+this.x+"],[Y="+this.y+"]";
+	}
+
+	public boolean ehProximo(Ponto ponto) {
+		System.out.println(this);
+		System.out.println(ponto);
+		if ((this.getX() - 5 <= ponto.getX()) && (this.getX() + 5 >= ponto.getX()) 
+		&& (this.getY() - 5 <= ponto.getY()) && (this.getY() + 5 >= ponto.getY())){
+			return true;
+		}
+		return false;
+	}
+
+	public void setPonto(Ponto ponto) {
+		this.x = ponto.getX();
+		this.y = ponto.getY();
+		
+	}
 }

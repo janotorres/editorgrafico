@@ -126,12 +126,12 @@ public class ObjetoGrafico {
 	}
 	
 	public void moveAcima(){
-		Ponto point = new Ponto(0, 20, 0);
+		Ponto point = new Ponto(0, -20, 0);
 		translacao(point);
 	}
 	
 	public void moveAbaixo(){
-		Ponto point = new Ponto(0, -20, 0);
+		Ponto point = new Ponto(0, 20, 0);
 		translacao(point);
 	}
 	
@@ -206,4 +206,8 @@ public class ObjetoGrafico {
 		setTransformacao(getTransformacao().transformMatrix(matrizTranslate));		
 	}	
 
+	public void setUltimoPonto(Ponto ponto){
+		int posicaoPonto  = this.getPontos().size() - 1;
+		this.getPontos().set(posicaoPonto,ponto);
+	}
 }

@@ -3,8 +3,11 @@ package br.com.furb.editorgrafico.listeners;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import javax.media.opengl.GL;
+
 import br.com.furb.editorgrafico.enumerations.Estado;
 import br.com.furb.editorgrafico.objetos.Mundo;
+import br.com.furb.editorgrafico.objetos.ObjetoGrafico;
 import br.com.furb.editorgrafico.objetos.Ponto;
 
 /**Listener do Mouse, utilizado quando o usuário está iteragindo com o Editor (movendo e clicando o mouse) */
@@ -23,49 +26,69 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		Ponto ponto = new Ponto(e.getX(), e.getY(), 0);
 		switch (mundo.getEstado()){
-		
-		case DESENHANDO:
-			
-			int x = (int)mundo.getCamera().getOrtho2D_minX() + (2 * e.getX());
-			int y = (int)mundo.getCamera().getOrtho2D_maxY() - (2 * e.getY());
-			Ponto ponto = new Ponto(e.getX(), e.getY(), 0);
-			System.out.println(e.getX());
-			System.out.println(e.getY());
-			int pos = mundo.getObjetos().get(1).getPontos().size() - 1;
-			mundo.getObjetos().get(1).getPontos().set(pos,ponto);
-			mundo.desenha();
-			break;
-		
-		case SELECAO:
-			
-			break;
+			case DESENHANDO:		
+				
+				ObjetoGrafico objeto = mundo.getUltimoObjeto();
+				objeto.setUltimoPonto(ponto);
+				mundo.desenha();
+				break;
+				
+			case EDITAR_PONTO:
+				if (mundo.getPontoEmEdicao() != null){
+					System.out.println("MOVENDO");
+					mundo.getPontoEmEdicao().setPonto(ponto);
+					mundo.desenha();
+				} 
+					
+			default: break;
 		}
 		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		Ponto ponto = new Ponto(e.getX() , e.getY(), 0);
+		
 		switch (mundo.getEstado()){
 		
-		case DESENHO:
 			
-			int x = (int)mundo.getCamera().getOrtho2D_minX() + (2 * e.getX());
-			int y = (int)mundo.getCamera().getOrtho2D_maxY() - (2 * e.getY());
-			Ponto ponto = new Ponto(e.getX() , e.getY(), 0);
-			System.out.println(e.getX());
-			System.out.println(e.getY());
-			mundo.criaObjeto(ponto);
-			mundo.setEstado(Estado.DESENHANDO);
-			break;
+			case DESENHO:
+				mundo.criaObjeto(ponto);
+				mundo.setEstado(Estado.DESENHANDO);
+				break;
+			case DESENHANDO:
+				
+				ObjetoGrafico objeto = mundo.getUltimoObjeto();
+				int qtdPontos = objeto.getPontos().size();
+				if  (qtdPontos > 3){
+					if (objeto.getPontos().get(0).ehProximo(ponto)){
+						objeto.setPrimitivaGrafica(GL.GL_LINE_LOOP);
+						mundo.setEstado(Estado.DESENHO);
+						System.out.println("TESTE");
+						break;
+					}
+				}
+				mundo.getUltimoObjeto().getPontos().add(ponto);
+				break;
 			
-		case DESENHANDO:
-			
-			break;
-		
-		case SELECAO:
-			
-			break;
+			case SELECAO:
+				
+				break;
+			case DELETAR_PONTO:
+				mundo.deletaPonto(ponto);
+				break;
+			case EDITAR_PONTO:
+				
+				if (mundo.getPontoEmEdicao() == null){
+					mundo.editarPonto(ponto);
+				} else {
+					mundo.setPontoEmEdicao(null);
+					mundo.setEstado(Estado.DESENHO);
+				}
+				break;
+
 		}
 		mundo.desenha();
 	}

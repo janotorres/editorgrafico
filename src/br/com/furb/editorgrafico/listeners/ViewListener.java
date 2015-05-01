@@ -4,7 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import br.com.furb.editorgrafico.enumerations.Cor;
+import br.com.furb.editorgrafico.enumerations.Estado;
 import br.com.furb.editorgrafico.objetos.Mundo;
+import br.com.furb.editorgrafico.objetos.ObjetoGrafico;
 
 /**Listener do teclado, utilizado para identificar quando o usuário que transformar
  * algum objeto, ou alterar o modo de edição do editor.*/
@@ -52,6 +54,25 @@ public class ViewListener implements KeyListener {
 			break;	
 		case KeyEvent.VK_2:
 			mundo.diminuirObjeto();
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_T:
+			ObjetoGrafico objeto = mundo.getUltimoObjeto();
+			int qtdPontos = objeto.getPontos().size();
+			if (mundo.getEstado().equals(Estado.DESENHANDO) && qtdPontos > 3){
+				objeto.getPontos().remove(qtdPontos - 1);
+				mundo.setEstado(Estado.DESENHO);
+			}
+				
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_D:
+			mundo.setEstado(Estado.DELETAR_PONTO);
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_E:
+			System.out.println("MODO EDIÇÃO");
+			mundo.setEstado(Estado.EDITAR_PONTO);
 			mundo.desenha();
 			break;
 		case KeyEvent.VK_3:

@@ -5,6 +5,8 @@ public enum Estado {
 
 	DESENHO,
 	DESENHANDO,
-	SELECAO;
+	SELECAO,
+	DELETAR_PONTO,
+	EDITAR_PONTO;
 	
 }
