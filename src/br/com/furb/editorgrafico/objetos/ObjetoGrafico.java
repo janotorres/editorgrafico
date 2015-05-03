@@ -173,7 +173,7 @@ public class ObjetoGrafico {
 	
 	/** Método que aumenta rotaciona o desenho. Utiliza a matriz de transformação. */
 	public void rotacaoDesenho(){
-		Ponto ponto = new Ponto(-250, -250, 0);
+		Ponto ponto = new Ponto(-200, -200, 0);
 		Transformacao matrizTranslate = new Transformacao();
 		matrizTranslate.MakeTranslation(ponto);
 		
