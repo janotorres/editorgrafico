@@ -25,6 +25,9 @@ public class ViewListener implements KeyListener {
 	 * Flecha para cima: Move o objeto selecionado para cima;
 	 * 1: Aumenta escala do objeto selecionado;
 	 * 2: Diminui escala do objeto selecionado;
+	 * T: Termina o desenho do objeto gráfico num polígono aberto;
+	 * D: Deleta o ponto selecionado;
+	 * E: Altera o modo de edição para "Edição";
 	 * 3: Rotaciona objeto selecionado;
 	 * R: Altera a cor do objeto selecionado para vermelho;
 	 * G: Altera a cor do objeto selecionado para verde;
