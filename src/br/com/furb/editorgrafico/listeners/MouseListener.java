@@ -46,7 +46,8 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 		}
 		
 	}
-
+	
+	/** Listener do click do mouse. Modifica o objeto gráfico de acordo com o estado dele. */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Ponto ponto = new Ponto(e.getX() , e.getY(), 0);

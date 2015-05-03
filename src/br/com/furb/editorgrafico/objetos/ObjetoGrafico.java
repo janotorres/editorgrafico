@@ -199,7 +199,8 @@ public class ObjetoGrafico {
 		setTransformacao(getTransformacao().transformMatrix(matrizGlobal));
 	}
 	
-	/** Método responsável pela translação do objeto. */
+	/** Método responsável pela translação do objeto.
+	 * @param ponto Ponto - coordenadas para transladar objeto. */
 	public void translacao(Ponto ponto) {
 		Transformacao matrizTranslate = new Transformacao();
 		matrizTranslate.MakeTranslation(ponto);

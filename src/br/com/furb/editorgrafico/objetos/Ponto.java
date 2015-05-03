@@ -58,6 +58,9 @@ public class Ponto implements Cloneable {
 		return "[X="+this.x+"],[Y="+this.y+"]";
 	}
 
+	/** Verifica se a distância dos pontos (ponto em questão e ponto passado por parâmetro) é próxima (5).
+	 * @param ponto Ponto - ponto para ser comparada a distância com o ponto em questão.
+	 * @return boolean - retorna true se os pontos forem próximos e false se não forem. */
 	public boolean ehProximo(Ponto ponto) {
 		System.out.println(this);
 		System.out.println(ponto);

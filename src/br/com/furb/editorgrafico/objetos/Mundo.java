@@ -234,6 +234,8 @@ public class Mundo extends GLCanvas implements GLEventListener{
 		return this.pontoEmEdicao;
 	}
 	
+	/** Seta coordenadas do click do usuário para o ponto em edição.
+	 * @param p Ponto - coordenadas do click do usuário. */
 	public void editarPonto(Ponto p) {
 		for (ObjetoGrafico objeto : objetos) {
 			for (Ponto ponto : objeto.getPontos()){
