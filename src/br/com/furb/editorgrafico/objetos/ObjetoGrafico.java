@@ -131,14 +131,14 @@ public class ObjetoGrafico {
 	/** Método que aumenta a escala do desenho. Utiliza a matriz de transformação. */
 	public void aumentaDesenho(){
 		
-		Ponto ponto = new Ponto(-150.0f, -150.0f, 0);
+		Ponto ponto = new Ponto(- this.boundBox.getCentroX(), - this.boundBox.getCentroY(), 0);
 		Transformacao matrizTranslate = new Transformacao();
 		matrizTranslate.MakeTranslation(ponto);
 		
 		Transformacao matrizScale = new Transformacao();		
 		matrizScale.MakeScale(2.0f,2.0f,1.0f);
 		
-		Ponto ponto2 = new Ponto(150.0f, 150.0f, 0);
+		Ponto ponto2 = new Ponto(this.boundBox.getCentroX(), this.boundBox.getCentroY(), 0);
 		Transformacao matrizTranslacaoInversa = new Transformacao();		
 		matrizTranslacaoInversa.MakeTranslation(ponto2);
 		
@@ -152,14 +152,14 @@ public class ObjetoGrafico {
 	
 	/** Método que diminui a escala do desenho. Utiliza a matriz de transformação. */
 	public void diminuiDesenho(){
-		Ponto ponto = new Ponto(-150f, -150f, 0);
+		Ponto ponto = new Ponto(- this.boundBox.getCentroX(), - this.boundBox.getCentroY(), 0);
 		Transformacao matrizTranslate = new Transformacao();
 		matrizTranslate.MakeTranslation(ponto);
 		
 		Transformacao matrizScale = new Transformacao();		
 		matrizScale.MakeScale(0.5,0.5,1.0);
 		
-		Ponto ponto2 = new Ponto(150f, 150f, 0);
+		Ponto ponto2 = new Ponto(this.boundBox.getCentroX(), this.boundBox.getCentroY(), 0);
 		Transformacao matrizTranslacaoInversa = new Transformacao();		
 		matrizTranslacaoInversa.MakeTranslation(ponto2);
 		
@@ -173,7 +173,7 @@ public class ObjetoGrafico {
 	
 	/** Método que aumenta rotaciona o desenho. Utiliza a matriz de transformação. */
 	public void rotacaoDesenho(){
-		Ponto ponto = new Ponto(-200, -200, 0);
+		Ponto ponto = new Ponto(- this.boundBox.getCentroX(), - this.boundBox.getCentroY(), 0);
 		Transformacao matrizTranslate = new Transformacao();
 		matrizTranslate.MakeTranslation(ponto);
 		
