@@ -1,5 +1,6 @@
 package br.com.furb.editorgrafico.objetos;
 
+
 /** Classe que armazena as coordenadas do vetor do objeto gráfico. */
 public class Ponto implements Cloneable {
 
@@ -72,5 +73,11 @@ public class Ponto implements Cloneable {
 		this.x = ponto.getX();
 		this.y = ponto.getY();
 		
+	}
+	
+	public void inverterSinal() {
+		this.x = this.x * -1;
+		this.y = this.y * -1;
+		this.z = this.z * -1;
 	}
 }

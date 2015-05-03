@@ -28,6 +28,7 @@ public class ObjetoGrafico {
 
 	public ObjetoGrafico(Ponto ponto) {
 		this.pontos = new ArrayList<Ponto>();
+		this.objetoGraficos = new ArrayList<ObjetoGrafico>();
 		this.transformacao = new Transformacao();
 		this.pontos.add(ponto);
 		this.pontos.add(ponto.copy());
@@ -71,14 +72,6 @@ public class ObjetoGrafico {
 
 	public void setBoundBox(BoundBox boundBox) {
 		this.boundBox = boundBox;
-	}
-
-	public List<ObjetoGrafico> getObjetoGraficos() {
-		return objetoGraficos;
-	}
-
-	public void setObjetoGraficos(List<ObjetoGrafico> objetoGraficos) {
-		this.objetoGraficos = objetoGraficos;
 	}
 
 	public boolean isSelected() {
@@ -180,16 +173,17 @@ public class ObjetoGrafico {
 	
 	/** Método que aumenta rotaciona o desenho. Utiliza a matriz de transformação. */
 	public void rotacaoDesenho(){
-		Ponto ponto = new Ponto(-150, -150, 0);
+		Ponto ponto = new Ponto(-250, -250, 0);
 		Transformacao matrizTranslate = new Transformacao();
 		matrizTranslate.MakeTranslation(ponto);
 		
 		Transformacao matrizRotacao = new Transformacao();
 		matrizRotacao.MakeZRotation(Transformacao.RAS_DEG_TO_RAD * 10);
 		
-		Ponto ponto2 = new Ponto(150, 150, 0);
+		//Ponto ponto2 = new Ponto(200, 200, 0);
+		ponto.inverterSinal();
 		Transformacao matrizTranslacaoInversa = new Transformacao();		
-		matrizTranslacaoInversa.MakeTranslation(ponto2);
+		matrizTranslacaoInversa.MakeTranslation(ponto);
 		
 		Transformacao matrizGlobal = new Transformacao();
 		matrizGlobal = matrizGlobal.transformMatrix(matrizTranslacaoInversa);
@@ -209,5 +203,64 @@ public class ObjetoGrafico {
 	public void setUltimoPonto(Ponto ponto){
 		int posicaoPonto  = this.getPontos().size() - 1;
 		this.getPontos().set(posicaoPonto,ponto);
+	}
+	
+	
+	public void geraBBox(){
+		float xMin = Float.MAX_VALUE;
+		float xMax = Float.MIN_VALUE;
+		float yMin = Float.MAX_VALUE;
+		float yMax = Float.MIN_VALUE;
+		for(Ponto ponto : this.pontos){
+			
+			System.out.println(ponto.toString());
+			if (ponto.getX() > xMax){
+				xMax = ponto.getX();
+			}
+			
+			if (ponto.getX() < xMin){
+				xMin = ponto.getX();
+			}
+			
+			if (ponto.getY() > yMax){
+				yMax = ponto.getY();
+			}
+
+			if (ponto.getY() < yMin){
+				yMin = ponto.getY();
+			}
+		}
+
+		this.boundBox = new BoundBox(xMin, xMax, yMin, yMax);
+	}
+
+	public boolean contains(Ponto ponto) {
+		return this.selected = (this.getBoundBox().contain(ponto) && this.scanline(ponto));
+	}
+
+	private boolean scanline(Ponto p) {
+		int paridade = 0;
+		for (int i = 0; i < this.pontos.size(); i++) {
+			Ponto p1 = this.pontos.get(i);
+			Ponto p2 = this.pontos.get(i + 1 == this.pontos.size() ? 0 : i +1 );
+			double Ti  = (p.getY()  - p1.getY()) / (p2.getY()  -  p1.getY());
+			if (Ti > 0 && Ti < 1){
+				double Xi =  p1.getX() + ((p2.getX() - p1.getX()) * Ti);
+				if (Xi > p.getX()){
+					paridade++;
+				}
+			}
+			
+			
+		}
+		return paridade % 2 == 1;
+	}
+
+	public void addFilho(ObjetoGrafico filho) {
+		this.objetoGraficos.add(filho);
+	}
+
+	public List<ObjetoGrafico> getObjetoGraficos() {
+		return this.objetoGraficos;
 	}
 }

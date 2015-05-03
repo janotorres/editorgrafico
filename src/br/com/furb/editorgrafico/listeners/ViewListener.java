@@ -61,7 +61,9 @@ public class ViewListener implements KeyListener {
 			int qtdPontos = objeto.getPontos().size();
 			if (mundo.getEstado().equals(Estado.DESENHANDO) && qtdPontos > 3){
 				objeto.getPontos().remove(qtdPontos - 1);
+				objeto.geraBBox();
 				mundo.setEstado(Estado.DESENHO);
+				
 			}
 				
 			mundo.desenha();
@@ -70,9 +72,18 @@ public class ViewListener implements KeyListener {
 			mundo.setEstado(Estado.DELETAR_PONTO);
 			mundo.desenha();
 			break;
+		case KeyEvent.VK_I:
+			mundo.setEstado(Estado.DESENHO);
+			mundo.desenha();
+			break;
+			
 		case KeyEvent.VK_E:
 			System.out.println("MODO EDIÇÃO");
 			mundo.setEstado(Estado.EDITAR_PONTO);
+			mundo.desenha();
+			break;
+		case KeyEvent.VK_S:
+			mundo.setEstado(Estado.SELECAO);
 			mundo.desenha();
 			break;
 		case KeyEvent.VK_3:

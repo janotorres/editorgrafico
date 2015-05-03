@@ -65,8 +65,13 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 				if  (qtdPontos > 3){
 					if (objeto.getPontos().get(0).ehProximo(ponto)){
 						objeto.setPrimitivaGrafica(GL.GL_LINE_LOOP);
+						objeto.geraBBox();
 						mundo.setEstado(Estado.DESENHO);
-						System.out.println("TESTE");
+						if (mundo.getObjetoSelecionado() != null){
+							ObjetoGrafico filho = mundo.getUltimoObjeto();
+							mundo.getObjetos().remove(filho);
+							mundo.getObjetoSelecionado().addFilho(filho);
+						}
 						break;
 					}
 				}
@@ -74,7 +79,7 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 				break;
 			
 			case SELECAO:
-				
+				mundo.selecionaObjeto(ponto);
 				break;
 			case DELETAR_PONTO:
 				mundo.deletaPonto(ponto);

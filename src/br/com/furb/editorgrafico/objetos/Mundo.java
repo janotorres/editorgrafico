@@ -96,26 +96,12 @@ public class Mundo extends GLCanvas implements GLEventListener{
 			gl.glMatrixMode(GL.GL_MODELVIEW);
 			gl.glLoadIdentity();
 			glu.gluOrtho2D(camera.getOrtho2D_minX(), camera.getOrtho2D_maxX(), camera.getOrtho2D_minY(), camera.getOrtho2D_maxY());
-			desenhaSRU();
 			desenhaObjetosGraficos();			
 			gl.glFlush();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
 		
-	}
-	
-	public void desenhaSRU() {
-		gl.glColor3f(1.0f, 0.0f, 0.0f);
-		gl.glBegin(GL.GL_LINES);
-			gl.glVertex2f(-200.0f, 0.0f);
-			gl.glVertex2f(200.0f, 0.0f);
-		gl.glEnd();
-		gl.glColor3f(0.0f, 1.0f, 0.0f);
-		gl.glBegin(GL.GL_LINES);
-			gl.glVertex2f(0.0f, -200.0f);
-			gl.glVertex2f(0.0f, 200.0f);
-		gl.glEnd();
 	}
 
 	/**Método que além de desenhar os objetos gráficos, desenha a BoundBox ao redor do objeto selecionado.*/
@@ -125,7 +111,10 @@ public class Mundo extends GLCanvas implements GLEventListener{
 			objetoGrafico.setGl(gl);
 			objetoGrafico.desenha();
 			if (objetoGrafico.isSelected())
-				objetoGrafico.getBoundBox().desenha();
+				objetoGrafico.getBoundBox().desenha(gl);
+			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()){
+				filho.desenha();
+			}
 		}
 		
 	}
@@ -166,45 +155,86 @@ public class Mundo extends GLCanvas implements GLEventListener{
 		this.objetos.add(objetoGrafico);
 	}
 	
+	
+	public ObjetoGrafico getObjetoSelecionado(){
+		for(ObjetoGrafico objeto : this.objetos){
+			if (objeto.isSelected())
+				return objeto;
+			for (ObjetoGrafico filho : objeto.getObjetoGraficos())
+				if (filho.isSelected())
+					return filho;
+		}
+		return null;
+	}
+	
 	public void moverObjetosDireta(){
-		for (int i = 0; i < objetos.size(); i++) {
-			objetos.get(i).moveDireta();
+		ObjetoGrafico objetoGrafico = getObjetoSelecionado();
+		if (objetoGrafico != null){
+			objetoGrafico.moveDireta();
+			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()) {
+				filho.moveDireta();	
+			}
 		}
 	}
 	
 	public void moverObjetosEsquerda(){
-		for (int i = 0; i < objetos.size(); i++) {
-			objetos.get(i).moveEsquerda();
+		ObjetoGrafico objetoGrafico = getObjetoSelecionado();
+		if (objetoGrafico != null){
+			objetoGrafico.moveEsquerda();
+			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()) {
+				filho.moveEsquerda();	
+			}
 		}
 	}
 	
 	public void moverObjetosAbaixo(){
-		for (int i = 0; i < objetos.size(); i++) {
-			objetos.get(i).moveAbaixo();
+		ObjetoGrafico objetoGrafico = getObjetoSelecionado();
+		if (objetoGrafico != null){
+			objetoGrafico.moveAbaixo();
+			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()) {
+				filho.moveAbaixo();	
+			}
 		}
 	}
 	
 	public void moverObjetosAcima(){
-		for (int i = 0; i < objetos.size(); i++) {
-			objetos.get(i).moveAcima();
+		ObjetoGrafico objetoGrafico = getObjetoSelecionado();
+		if (objetoGrafico != null){
+			objetoGrafico.moveAcima();
+			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()) {
+				filho.moveAcima();	
+			}
 		}
+		
 	}
 	
 	public void aumentarObjeto(){
-		for (int i = 0; i < objetos.size(); i++) {
-			objetos.get(i).aumentaDesenho();
+		ObjetoGrafico objetoGrafico = getObjetoSelecionado();
+		if (objetoGrafico != null){
+			objetoGrafico.aumentaDesenho();
+			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()) {
+				filho.aumentaDesenho();	
+			}
 		}
 	}
 	
 	public void diminuirObjeto(){
-		for (int i = 0; i < objetos.size(); i++) {
-			objetos.get(i).diminuiDesenho();
+		ObjetoGrafico objetoGrafico = getObjetoSelecionado();
+		if (objetoGrafico != null){
+			objetoGrafico.diminuiDesenho();
+			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()) {
+				filho.diminuiDesenho();	
+			}
 		}
 	}
 	
 	public void rotacaoObjeto(){
-		for (int i = 0; i < objetos.size(); i++) {
-			objetos.get(i).rotacaoDesenho();
+		ObjetoGrafico objetoGrafico = getObjetoSelecionado();
+		if (objetoGrafico != null){
+			objetoGrafico.rotacaoDesenho();
+			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()) {
+				filho.rotacaoDesenho();	
+			}
 		}
 	}
 	
@@ -249,5 +279,24 @@ public class Mundo extends GLCanvas implements GLEventListener{
 	public void setPontoEmEdicao(Ponto ponto) {
 		this.pontoEmEdicao = ponto;
 		
+	}
+	
+	public void selecionaObjeto(Ponto ponto) {
+		for(ObjetoGrafico objeto : this.objetos){
+			if (objeto.contains(ponto))
+				return;
+			for (ObjetoGrafico filho : objeto.getObjetoGraficos()){
+				if (filho.contains(ponto))
+					return;	
+			}
+		}
+	}
+	
+	private void limpaSelecao(){
+		for(ObjetoGrafico objeto : this.objetos){
+			objeto.setSelected(false);
+			for (ObjetoGrafico filho : objeto.getObjetoGraficos())
+				filho.setSelected(false);
+		}
 	}
 }
