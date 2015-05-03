@@ -32,6 +32,8 @@ public class ViewListener implements KeyListener {
 	 * R: Altera a cor do objeto selecionado para vermelho;
 	 * G: Altera a cor do objeto selecionado para verde;
 	 * A: Altera a cor do objeto selecionado para azul;
+	 * S: Altera o estado do Editor para "Seleção", permitindo selecionar objetos;
+	 * I: Permite desenhar vértices quando estiver em modo "Seleção";
 	 * */
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {			
