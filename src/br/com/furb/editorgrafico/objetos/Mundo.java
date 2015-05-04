@@ -114,6 +114,8 @@ public class Mundo extends GLCanvas implements GLEventListener{
 				objetoGrafico.getBoundBox().desenha(gl);
 			for (ObjetoGrafico filho : objetoGrafico.getObjetoGraficos()){
 				filho.desenha();
+				if (filho.isSelected())
+					filho.getBoundBox().desenha(gl);
 			}
 		}
 		
@@ -284,6 +286,7 @@ public class Mundo extends GLCanvas implements GLEventListener{
 	}
 	
 	public void selecionaObjeto(Ponto ponto) {
+		limpaSelecao();
 		for(ObjetoGrafico objeto : this.objetos){
 			if (objeto.contains(ponto))
 				return;
@@ -299,6 +302,19 @@ public class Mundo extends GLCanvas implements GLEventListener{
 			objeto.setSelected(false);
 			for (ObjetoGrafico filho : objeto.getObjetoGraficos())
 				filho.setSelected(false);
+		}
+	}
+	public void removerObjetoSelecionado() {
+		for(ObjetoGrafico objeto : this.objetos){
+			if (objeto.isSelected()){
+				this.objetos.remove(objeto);
+				return;
+			}
+			for (ObjetoGrafico filho : objeto.getObjetoGraficos())
+				if (filho.isSelected()){
+					objeto.getObjetoGraficos().remove(filho);
+					return;
+				}
 		}
 	}
 }

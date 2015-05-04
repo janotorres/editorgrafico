@@ -107,6 +107,10 @@ public class ViewListener implements KeyListener {
 			mundo.pintarObjeto(Cor.AZUL);
 			mundo.desenha();
 			break;
+		case KeyEvent.VK_M:
+			mundo.removerObjetoSelecionado();
+			mundo.desenha();
+			break;
 		}
 	}
 
